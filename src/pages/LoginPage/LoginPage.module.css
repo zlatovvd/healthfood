@@ -1,0 +1,26 @@
+.loginPage {
+  padding-top: 120px;
+}
+
+@media screen and (min-width: 768px) {
+  .loginPage {
+    padding-top: 240px;
+    padding-bottom: 494px;
+    background-image: url('images/strawberry-desktop.png'),
+      url('images/banana-tablet.png'), url('images/layer-42-tablet.png');
+    background-repeat: no-repeat;
+    background-position: left 470px top 470px, left 277px top 584px, left top;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .loginPage {
+    padding-top: 306px;
+    padding-bottom: 255px;
+    background-image: url('images/strawberry-desktop.png'),
+      url('images/banana-desktop.png'), url('images/layer-desktop1.png'),
+      url('images/hero-background-desktop.png');
+    background-position: right top 470px, right top, right 190px top,
+      right top 40px;
+  }
+}

@@ -1,0 +1,1 @@
+export const selectPersonInfo = state => state.intake.personInfo;

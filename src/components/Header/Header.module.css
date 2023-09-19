@@ -1,0 +1,126 @@
+.header {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 80px;
+  width: 320px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-bottom: 2px solid #e0e0e0;
+  z-index: 99999999;
+}
+
+.userWrapper {
+  position: absolute;
+  top: 82px;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content:space-between;
+  height: 40px;
+  width: 320px;
+  padding-left: 20px;
+  padding-right: 20px;
+  background-color: #eff1f3;
+}
+
+.navFooter {
+  position: absolute;
+  top: 82px;
+  left: 0;
+  height: 40px;
+  width: 320px;
+  padding-left: 20px;
+  padding-right: 20px;
+  background-color: #eff1f3;
+}
+
+.backBtn {
+  height: 14px;
+  width: 20px;
+  border: none;
+  background-image: url('images/back.svg');
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+
+.menuBtn {
+  padding: 0;
+  margin-left: 30px;
+  height: 24px;
+  width: 24px;
+  background-image: url(images/menu.svg);
+  background-repeat: no-repeat;
+  border: none;
+  background-color: transparent;
+  transition: all 300ms linear;
+  cursor: pointer;
+}
+
+.closeBtn {
+  padding: 0;
+  margin-left: 30px;
+  height: 24px;
+  width: 24px;
+  background-image: url(images/close.svg);
+  background-repeat: no-repeat;
+  border: none;
+  background-color: transparent;
+  transition: all 300ms linear;
+  cursor: pointer;
+}
+
+@media screen and (min-width: 768px) {
+
+  .header {
+    width: 768px;
+  }
+
+  .navFooter {
+    display: none;
+  }
+
+  .userWrapper {
+    position: static;
+    justify-content: end;
+    top: auto;
+    left: auto;
+    background-color: transparent;
+  }
+
+  .backBtn {
+    display: none;
+  }
+
+  .rightNavBlock {
+    display: flex;
+    align-items: center;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .header {
+    align-items: flex-end;
+    justify-content: flex-start;
+    height: 150px;
+    width: 1280px;
+    border: none;
+  }
+
+  .nawWrapper {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .userWrapper {
+    align-items: flex-end;
+  }
+
+  .menuBtn,
+  .closeBtn {
+    display: none;
+  }
+}

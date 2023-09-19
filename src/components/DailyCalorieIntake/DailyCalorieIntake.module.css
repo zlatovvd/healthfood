@@ -1,0 +1,94 @@
+.container {
+    width: 280px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.title {
+    max-width: 280px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 18px;
+    line-height: 1.4;
+    color: #212121;
+}
+
+.calories {
+    text-align: center;
+    margin-top: 42px;
+    font-size: 48px;
+    line-height: 1.22;
+    color: #264061
+}
+
+.calories span {
+    font-size: 16px;
+    line-height: 1.22;
+}
+
+.foodTitle {
+    font-size: 14px;
+    line-height: 1.21;
+}
+
+.foodTitle::before {
+    content: '';
+    display: block;
+    width: 280px;
+    height: 0;
+    margin-top: 46px;
+    margin-bottom: 20px;
+    border:1px solid #E0E0E0;
+}
+
+.foodList {
+    margin-top: 23px;
+    margin-left: 20px;
+    margin-bottom: 20px;
+    padding: 0;
+}
+
+.foodItem {
+    margin-left: 0;
+    font-size: 14px;
+    line-height: 1.21;
+    color: #9B9FAA;
+}
+
+.foodItem:not(:last-child) {
+    margin-bottom: 18px;
+}
+
+.modalBtn {
+    display: block;
+    padding: 13px 25px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+    background-color: #fc842d;
+    font-family: 'Verdana';
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 1.21;
+    color: #ffffff;
+    border-radius: 30px;
+    border: transparent;
+    box-shadow: 0px 4px 10px 0px #fc842d80;
+}
+
+
+@media screen and (min-width: 768px) {
+
+    .container {
+        width: 330px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .title {
+        text-align: center;
+        max-width: 408px;
+        font-size: 26px;
+    }  
+    
+}

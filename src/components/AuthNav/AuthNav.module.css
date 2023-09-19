@@ -1,0 +1,34 @@
+.authList {
+    margin-left: auto;
+    display: flex;
+    list-style: none;
+}
+
+.authItem {
+    color: #9B9FAA;
+    text-transform: uppercase;
+}
+
+.authItem:first-child {
+    margin-right: 15px;
+}
+
+@media screen and (min-width: 1280px) {
+    
+    .authList {
+        margin: 0;
+        align-self: flex-end;
+        padding: 0;
+    }
+
+    .authList::before {
+        content: "";
+        display: inline-block;
+        width: 32px;
+        height: 0;
+        margin-left: 10px;
+        margin-right: 10px;
+        border-bottom: 2px solid #E0E0E0;
+        transform: rotate(90deg);
+    }
+}

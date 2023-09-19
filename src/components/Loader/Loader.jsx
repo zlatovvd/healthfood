@@ -1,4 +1,5 @@
 import AppSpinner from "components/AppSpinner/AppSpiner";
+import Layout from "components/Layout/Layout";
 import { useProducts } from "hooks/useProducts";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
@@ -8,17 +9,14 @@ const Loader = () => {
 
     const dispatch = useDispatch();
     const { isLoading, data } = useProducts();
-
+    console.log(data);
     useEffect(() => {
         dispatch(getProductThunk());
-    }, [])
+    }, [dispatch])
 
     return (
       <>
-        {isLoading && (
-          <AppSpinner />
-        )}
-        {data && <h2>Data is loaded</h2>}
+        {isLoading ? <AppSpinner /> : <Layout />}
       </>
     );
 

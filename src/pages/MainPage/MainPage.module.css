@@ -1,0 +1,29 @@
+.mainPage {
+  padding-top: 112px;
+  padding-bottom: 20px;
+}
+
+@media screen and (min-width: 768px) {
+  .mainPage {
+    padding-top: 180px;
+    padding-bottom: 400px;
+    background-image: url('images/strawberry-tablet.png'),
+      url('images/banana-tablet.png'), url('images/hero-tablet.png'),
+      url('images/background-hero-tablet.png');
+    background-repeat: no-repeat;
+    background-position: left 420px bottom 170px, left 277px bottom, left bottom,
+      left 247px bottom;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .mainPage {
+    padding-top: 293px;
+    padding-bottom: 80px;
+     background-image: url('images/strawberry-desktop.png'),
+      url('images/banana-desktop.png'), url('images/layer-desktop1.png'),
+      url('images/hero-background-desktop.png');
+    background-position: right top 470px, right top, right 190px top,
+      right top 40px;
+  }
+}

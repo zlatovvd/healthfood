@@ -1,0 +1,76 @@
+.loginForm input {
+  width: 280px;
+  height: 20px;
+  padding-left: 130px;
+  border: transparent;
+  border-bottom: 1px solid #e0e0e0;
+  outline: none;
+}
+
+.title {
+  text-align: center;
+  margin: 0;
+  margin-bottom: 55px;
+  margin-left: auto;
+  margin-right: auto;
+  color: #fc842d;
+  text-transform: uppercase;
+}
+
+.formLabel {
+  display: flex;
+  flex-direction: column;
+  color: #9b9faa;
+}
+
+.formLabel:not(:last-child) {
+  margin-bottom: 40px;
+}
+
+.formLabel:last-child {
+    margin-bottom: 60px;
+}
+
+.button {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  min-width: 162px;
+  height: 44px;
+  border-radius: 30px;
+  background-color: #ffffff;
+  border: 2px solid #fc842d;
+  box-shadow: 0px 4px 10px 0px #fc842d80;
+  color: #fc842d;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: #fc842d;
+  border: transparent;
+  box-shadow: 0px 4px 10px 0px #fc842d80;
+  color: #ffffff;
+}
+
+.button:not(:last-child) {
+  margin-bottom: 20px;
+}
+
+@media screen and (min-width: 768px) {
+  .title {
+    text-align: left;
+  }
+
+  .loginForm input {
+    display: block;
+  }
+
+  .button {
+    display: inline;
+  }
+
+  .button:not(:last-child) {
+    margin-bottom: 0;
+    margin-right: 32px;
+  }
+}

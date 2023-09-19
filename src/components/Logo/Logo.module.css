@@ -1,0 +1,21 @@
+.logo {
+  height: 44px;
+  width: 44px;
+  background-image: url('images/logo-mobile.png');
+}
+
+@media screen and (min-width: 768px) {
+  .logo {
+    width: 162px;
+    background-image: url('images/logo-tablet.png');
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .logo {
+    width: 167px;
+    height: 66px;
+    background-image: url('images/logo-desktop.png');
+  }
+  
+}
