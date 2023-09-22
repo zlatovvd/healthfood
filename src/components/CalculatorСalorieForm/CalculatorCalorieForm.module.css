@@ -1,0 +1,156 @@
+.calculateForm {
+  padding-bottom: 41px;
+}
+
+.title {
+  font-size: 18px;
+  margin: 0;
+}
+
+.inputWrapper {
+  margin-top: 34px;
+}
+
+.inputLabel {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 32px;
+  color: #9b9faa;
+}
+
+.formInput {
+  width: 240px;
+  height: 20px;
+  padding-left: 150px;
+  font-weight: 700;
+  outline: none;
+  border: none;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.bloodTitle {
+  text-align: left;
+  color: #9b9faa;
+  margin: 0;
+  margin-bottom: 10px;
+}
+
+.radioRow {
+  display: flex;
+  width: 240px;
+  justify-content: space-between;
+  border-top: 1px solid #e0e0e0;
+  padding-top: 10px;
+}
+
+.radioLabel {
+  display: flex;
+  align-items: baseline;
+}
+
+.inputRadio {
+  height: 1px;
+  width: 1px;
+  outline: none;
+}
+
+.radio {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 20px;
+  width: 20px;
+  margin: 0;
+  border-radius: 50%;
+  border: 2px solid #e0e0e0;
+}
+
+.radio::before {
+  content: '';
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.radioMessage {
+  margin-left: 10px;
+  color: #9b9faa;
+}
+
+.inputRadio:checked + .radio::before {
+  background-color: #fc842d;
+}
+
+.inputRadio:checked ~ .radioMessage {
+  color: #fc842d;
+}
+
+.submitBtn {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  min-width: 162px;
+  height: 44px;
+  border-radius: 30px;
+  background-color: #ffffff;
+  border: 2px solid #fc842d;
+  box-shadow: 0px 4px 10px 0px #fc842d80;
+  color: #fc842d;
+  cursor: pointer;
+}
+
+.submitBtn:hover {
+  background-color: #fc842d;
+  border: transparent;
+  box-shadow: 0px 4px 10px 0px #fc842d80;
+  color: #ffffff;
+}
+
+@media screen and (min-width: 768px) {
+ 
+  .calculateForm {
+     padding-top: 60px;
+  }
+
+  .title {
+    max-width: 608px;
+    font-size: 34px;
+  }
+
+  .inputWrapper {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: flex-start;
+    column-gap: 20px;
+    height: 240px;
+    width: 530px;
+    margin-top: 68px;
+  }
+
+  .inputLabel {
+    margin-bottom: 40px;
+  }
+
+  .bloodTitle {
+    margin-bottom: 20px;
+  }
+
+  .submitBtn {
+    margin: 0;
+    margin-top: 20px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .calculateForm {
+    width: 508px;
+    padding-top: 293px;
+    padding-bottom: 140px;
+  }
+
+  .submitBtn {
+    margin-left: auto;
+  }
+}

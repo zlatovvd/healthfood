@@ -1,6 +1,7 @@
 import AppSpinner from "components/AppSpinner/AppSpiner";
 import Layout from "components/Layout/Layout";
 import { useProducts } from "hooks/useProducts";
+import MainPage from "pages/MainPage/MainPage";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { getProductThunk } from "redux/products/productsThunk";
@@ -16,7 +17,7 @@ const Loader = () => {
 
     return (
       <>
-        {isLoading ? <AppSpinner /> : <Layout />}
+        {isLoading && <AppSpinner /> }
       </>
     );
 

@@ -1,0 +1,15 @@
+.calculatorPage {
+  padding-top: 152px;
+  padding-bottom: 100px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+@media screen and (min-width: 1280px) {
+  .calculatorPage {
+    display: flex;
+    justify-content: space-between;
+    width: 1280px;
+    padding-top: 0;
+  }
+}

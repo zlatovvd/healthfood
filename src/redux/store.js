@@ -12,13 +12,15 @@ import {
     persistStore,
   } from 'redux-persist';
 import { intakeReducer } from "./intake/intakeSlice";
+import { diaryReducer } from "./diary/diarySlice";
 
 export const store = configureStore({
     reducer: {
         products: productsReduser,
         auth: authReducer,
         modal: modalReducer,
-        intake: intakeReducer
+        intake: intakeReducer,
+        diary: diaryReducer
     },
     middleware: getDefaultMiddleware =>
       getDefaultMiddleware({

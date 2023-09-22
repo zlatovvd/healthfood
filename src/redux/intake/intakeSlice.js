@@ -3,10 +3,10 @@ const { createSlice } = require("@reduxjs/toolkit");
 const initIntake = {
     isLoading: false,
     personInfo: {
-      height: '',
-      age: '',
-      cweight: '',
-      dweight: '',
+      height: '178',
+      age: '50',
+      cweight: '95',
+      dweight: '85',
       typeblood: 1,
     },
   };

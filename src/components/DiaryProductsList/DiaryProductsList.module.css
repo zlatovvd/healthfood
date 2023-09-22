@@ -1,0 +1,71 @@
+.productList {
+  padding-bottom: 60px;
+}
+
+.diaryProductsList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  max-height: 300px;
+  overflow: auto;
+}
+
+.diaryProductsListItem {
+  display: flex;
+  margin-bottom: 15px;
+}
+
+.diaryProductsListItem span {
+  display: block;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #9b9faa;
+  color: #212121;
+}
+
+.product {
+  width: 130px;
+  margin-right: 10px;
+  font-weight: 400;
+}
+
+.grams,
+.calories {
+  text-align: right;
+  font-weight: 400;
+  font-size: 10px;
+  width: 50px;
+  margin-right: 10px;
+}
+
+.closeBtn {
+  cursor: pointer;
+  border: transparent;
+  background-color: transparent;
+  background-image: url('images/del.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+
+
+@media screen and (min-width: 768px) {
+  .productList {
+    padding-bottom: 55px;
+  }
+
+  .product {
+  width: 240px;
+  margin-right: 20px;
+}
+
+.grams,
+.calories {
+  text-align: right;
+  width: 106px;
+  margin-right: 40px;
+  font-size: 14px;
+}
+  
+}

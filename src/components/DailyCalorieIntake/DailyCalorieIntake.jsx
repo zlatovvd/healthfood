@@ -10,6 +10,8 @@ const DailyCalorieIntake = ({close}) => {
   const calories = useSelector(selectCalculateDailyCalories);
   const notRecommended = useSelector(selectNotRecommendedProducts);
 
+  console.log("INTAJE " , calories);
+
   const navigate = useNavigate();
 
   const handleModalBtn = () => {

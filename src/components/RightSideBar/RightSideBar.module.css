@@ -1,0 +1,88 @@
+.rightSideBar {
+    width: 320px;
+    background-color: #F0F1F3;
+}
+
+.container {
+    width: 280px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.summaryLeftWrapper {
+    margin-bottom: 40px;
+}
+
+
+.summaryTitle {
+    font-size: 14px;
+    color: #212121;
+    margin-bottom: 40px;
+}
+
+.summaryList {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.summaryListItem {
+    display: flex;
+    justify-content: space-between;
+}
+
+.summaryListItem:not(:first-child) {
+    margin-top: 20px;
+}
+
+.summaryText,
+.summaryValue {
+    display: block;
+    width: 130px;
+    color: #9B9FAA;
+}
+
+.summaryValue {
+    text-align: right;
+}
+
+.notRecommended {
+    margin-top: 20px;
+    color: #9B9FAA;
+}
+
+@media screen and (min-width: 768px) {
+
+    .rightSideBar {
+        width: 768px;
+        background-image: url('images/layer-41-tablet.png');
+        background-repeat: no-repeat;
+        background-position: right bottom;
+    }
+
+    .container {
+        display: flex;
+        justify-content: space-between;
+        width: 728px;
+    }
+
+    .summaryLeftWrapper,
+    .summaryRightWrapper {
+        width: 288px;
+    }
+}
+
+@media screen and (min-width: 1280px) {
+    .rightSideBar {
+        padding-top: 293px;
+        width: 520px;
+        background-image: url('images/layer-desktop.png');
+    }
+
+    .container {
+        display: block;
+        width: 288px;
+    }
+}

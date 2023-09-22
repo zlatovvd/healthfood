@@ -51,13 +51,16 @@ const authSlice = createSlice({
       })
       .addCase(authRefreshThunk.pending, state => {
         state.isLoading = true;
+        state.isRefreshing = true;
       })
       .addCase(authRefreshThunk.fulfilled, (state, {payload}) => {
         state.user = payload;
         state.isLoading = false;
+        state.isRefreshing = false;
       })
       .addCase(authRefreshThunk.rejected, state => {
         state.isLoading = false;
+        state.isRefreshing = false;
       })
   },
 });

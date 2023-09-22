@@ -5,20 +5,41 @@ export const selectProducts = state => state.products.data;
 
 export const selectIsLoading = state => state.products.isLoading;
 
+export const selectFilter = state => state.products.filter;
+
 const intakePersonInfo = useIntake;
+
+export const selectFilteredProducts = createSelector(
+  [selectProducts, selectFilter],
+  (products, filter) => {
+    return products.filter(item =>
+      item.title.ua.toLowerCase().includes(filter.toLowerCase())
+    );
+  }
+);
+
+export const selectFoundProduct = createSelector(
+  [selectProducts, selectFilter],
+  (products, filter) => {
+    return products.find(
+      option => option.title.ua.toLowerCase() === filter.toLowerCase()
+    );
+  }
+);
 
 export const selectCalculateDailyCalories = createSelector(
     [intakePersonInfo],
     personInfo => {
       if(personInfo) {
-        const { height, age, cWeight, dWeight } = personInfo;
-  
+
+        const { height, age, cweight, dweight } = personInfo.intakePersonInfo;
+        
         return (
-          10 * Number(cWeight) +
+          10 * Number(cweight) +
           6.25 * Number(height) -
           5 * Number(age) -
           161 -
-          10 * (Number(cWeight) - Number(dWeight))
+          10 * (Number(cweight) - Number(dweight))
         );
       }
       return 0;
@@ -31,13 +52,17 @@ export const selectCalculateDailyCalories = createSelector(
     (products, personInfo) => {
       if (personInfo) {
         const notRecommended = [];
-        const {typeblood} = personInfo;
+        console.log("SELECT", personInfo.intakePersonInfo);
+        const {typeblood} = personInfo.intakePersonInfo;
+        console.log("SELECT 2", typeblood, 'prod', products);
         products.map(item => {
+          console.log('item', item);
+          
           if (
             item.groupBloodNotAllowed[typeblood] === true &&
-            !notRecommended.includes(item.categories[0])
+            !notRecommended.includes(item.categories)
           ) {
-            notRecommended.push(item.categories[0]);
+            notRecommended.push(item.categories);
           }
         });
     
