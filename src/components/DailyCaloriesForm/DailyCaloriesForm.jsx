@@ -161,9 +161,9 @@ const DailyCaloriesForm = () => {
       </form>
 
       {isOpen && (
-        // <Modal close={toggle}>
+         <Modal close={toggle}>
            <DailyCalorieIntake close={toggle} />
-         //</Modal>
+         </Modal>
       )}
     </>
   );

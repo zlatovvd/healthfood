@@ -60,9 +60,9 @@ export const selectCalculateDailyCalories = createSelector(
           
           if (
             item.groupBloodNotAllowed[typeblood] === true &&
-            !notRecommended.includes(item.categories)
+            !notRecommended.includes(item.categories[0])
           ) {
-            notRecommended.push(item.categories);
+            notRecommended.push(item.categories[0]);
           }
         });
     
