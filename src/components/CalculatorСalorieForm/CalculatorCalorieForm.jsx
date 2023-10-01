@@ -7,6 +7,8 @@ import { intakeAddThunk, intakeUpdateThunk } from 'redux/intake/intakeThunk';
 const CalculatorCalorieForm = () => {
   const personInfo = useSelector(selectPersonInfo);
 
+  console.log(personInfo);
+
   const [values, setValues] = useState(personInfo);
 
   const dispatch = useDispatch();
@@ -19,8 +21,9 @@ const CalculatorCalorieForm = () => {
 
   const onSubmit = event => {
     event.preventDefault();
-    if (values._id) {
-      dispatch(intakeUpdateThunk(values._id, values));
+    if (values.owner) {
+      console.log('owner', values.owner);
+      dispatch(intakeUpdateThunk(values));
     } else {
       dispatch(intakeAddThunk(values));
     }

@@ -6,7 +6,7 @@ import storage from 'redux-persist/lib/storage';
 const authInitialState = {
   user: {name:null, email:null},
   token: null,
-  isLoggedIn: false,
+  isLoggedIn: true,
   isRefreshing: false,
   isLoading: false,
 };

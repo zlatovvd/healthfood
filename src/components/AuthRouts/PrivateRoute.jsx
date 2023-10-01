@@ -5,7 +5,7 @@ const PrivateRoute = () => {
 
     const { isRefreshing, isLoggedIn } = useAuth();
     
-    return !isLoggedIn && !isRefreshing ? <Navigate to="/" replace /> : <Outlet />;
+    return !isLoggedIn && !isRefreshing ? <Navigate to="/login" replace /> : <Outlet />;
 }
 
 export default PrivateRoute;
