@@ -3,8 +3,11 @@ import Loader from './Loader/Loader';
 import { ChakraProvider } from '@chakra-ui/react';
 import { PublicRoute, PrivateRoute } from './AuthRouts';
 import NotFound from 'pages/NotFound/NotFound';
-import { lazy } from 'react';
+import { lazy, useEffect } from 'react';
 import Layout from './Layout/Layout';
+import { useDispatch } from 'react-redux';
+import { authRefreshThunk } from 'redux/auth/authThunk';
+import { useAuth } from 'hooks/useAuth';
 
 const MainPage = lazy(() => import('pages/MainPage/MainPage'));
 const LoginPage = lazy(() => import('pages/LoginPage/LoginPage'));
@@ -17,7 +20,17 @@ const CalculatorPage = lazy(() =>
 );
 
 export const App = () => {
+
+  const dispatch = useDispatch();
+
+  const {isRefreshing} = useAuth();
+
+  useEffect(() => {
+    dispatch(authRefreshThunk());
+  }, [dispatch]);
+
   return (
+    isRefreshing ? <b>Refreshing ...</b> :
     <ChakraProvider>
       <Routes>
         <Route path="/" element={<Layout />}>
