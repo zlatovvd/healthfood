@@ -21,7 +21,7 @@ const CalculatorPage = () => {
   ) : (
     <div className={css.calculatorPage}>
       <CalculatorCalorieForm />
-      <RightSideBar />
+      {/* <RightSideBar /> */}
     </div>
   );
 };

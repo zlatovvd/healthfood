@@ -1,13 +1,16 @@
+import { useAuth } from 'hooks/useAuth';
 import css from './CalculatorCalorieForm.module.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectPersonInfo } from 'redux/intake/intakeSelector';
-import { intakeAddThunk, intakeUpdateThunk } from 'redux/intake/intakeThunk';
+import { intakeAddThunk, intakeGetThunk, intakeUpdateThunk } from 'redux/intake/intakeThunk';
 
 const CalculatorCalorieForm = () => {
   const personInfo = useSelector(selectPersonInfo);
 
   const [values, setValues] = useState(personInfo);
+
+  const {user} = useAuth();
 
   const dispatch = useDispatch();
 
@@ -19,12 +22,19 @@ const CalculatorCalorieForm = () => {
 
   const onSubmit = event => {
     event.preventDefault();
+    console.log('person', personInfo);
     if (values._id) {
+      console.log('values id', values.owner);
+      
       dispatch(intakeUpdateThunk(values._id, values));
     } else {
       dispatch(intakeAddThunk(values));
     }
   };
+
+  useEffect(() => {
+    dispatch(intakeGetThunk());
+  }, [dispatch])
 
   return (
     <form className={css.calculateForm} onSubmit={onSubmit}>

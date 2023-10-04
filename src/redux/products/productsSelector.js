@@ -56,13 +56,12 @@ export const selectCalculateDailyCalories = createSelector(
         const {typeblood} = personInfo.intakePersonInfo;
         console.log("SELECT 2", typeblood, 'prod', products);
         products.map(item => {
-          console.log('item', item);
-          
+         
           if (
             item.groupBloodNotAllowed[typeblood] === true &&
-            !notRecommended.includes(item.categories)
+            !notRecommended.includes(item.categories[0])
           ) {
-            notRecommended.push(item.categories);
+            notRecommended.push(item.categories[0]);
           }
         });
     
