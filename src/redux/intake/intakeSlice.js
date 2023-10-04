@@ -1,15 +1,12 @@
-import { intakeGetThunk } from "./intakeThunk";
-
 const { createSlice } = require("@reduxjs/toolkit");
 
 const initIntake = {
     isLoading: false,
     personInfo: {
-      id: '',
-      height: '',
-      age: '',
-      cweight: '',
-      dweight: '',
+      height: '178',
+      age: '50',
+      cweight: '95',
+      dweight: '85',
       typeblood: 1,
     },
   };
@@ -24,19 +21,6 @@ const intakeSlice = createSlice({
               state.personInfo = payload;
             },
           },
-    },
-    extraReducers: builder => {
-      builder.addCase(intakeGetThunk.pending, state => {
-        state.isLoading = true;
-      })
-      .addCase(intakeGetThunk.fulfilled, (state, {payload}) => {
-        state.personInfo = payload;
-        console.log('payload!! intake', payload)
-        state.isLoading = false;
-      })
-      .addCase(intakeGetThunk.rejected, state => {
-        state.isLoading = false;
-      })
     }
 
 })

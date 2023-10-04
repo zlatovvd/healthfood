@@ -8,6 +8,8 @@ import { intakeAddThunk, intakeGetThunk, intakeUpdateThunk } from 'redux/intake/
 const CalculatorCalorieForm = () => {
   const personInfo = useSelector(selectPersonInfo);
 
+  console.log(personInfo);
+
   const [values, setValues] = useState(personInfo);
 
   const {user} = useAuth();
@@ -22,11 +24,17 @@ const CalculatorCalorieForm = () => {
 
   const onSubmit = event => {
     event.preventDefault();
+<<<<<<< HEAD
     console.log('person', personInfo);
     if (values._id) {
       console.log('values id', values.owner);
       
       dispatch(intakeUpdateThunk(values._id, values));
+=======
+    if (values.owner) {
+      console.log('owner', values.owner);
+      dispatch(intakeUpdateThunk(values));
+>>>>>>> a7234e7ecb50f58c0d4b2dd526a8d635991c96db
     } else {
       dispatch(intakeAddThunk(values));
     }

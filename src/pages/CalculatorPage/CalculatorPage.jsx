@@ -10,16 +10,17 @@ import { useIntake } from 'hooks/useIntake';
 const CalculatorPage = () => {
   const dispatch = useDispatch();
 
-  const { isLoading } = useIntake();
+  const { intakeIsLoading, intakePersonInfo } = useIntake();
 
-  useEffect(() => {
+  useEffect( () => {
     dispatch(intakeGetThunk());
   }, [dispatch]);
 
-  return  isLoading ? (
+  return  intakeIsLoading ? (
     <b>...Loading</b>
   ) : (
     <div className={css.calculatorPage}>
+      
       <CalculatorCalorieForm />
       {/* <RightSideBar /> */}
     </div>

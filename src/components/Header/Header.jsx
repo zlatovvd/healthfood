@@ -4,14 +4,14 @@ import UserInfo from 'components/UserInfo/UserInfo';
 import Logo from 'components/Logo/Logo';
 import Navigation from 'components/Navigation/Navigation';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectIsLoggedIn } from 'redux/auth/authSelector';
 import { useState } from 'react';
 import { selectIsOpen } from 'redux/modal/modalSelector';
 import { open } from 'redux/modal/modalSlice';
+import { useAuth } from 'hooks/useAuth';
 
 const Header = () => {
   
-  const isLoggedIn = useSelector(selectIsLoggedIn);
+  const {isLoggedIn} = useAuth();
   const isModalOpen = useSelector(selectIsOpen);
 
   const dispatch = useDispatch();

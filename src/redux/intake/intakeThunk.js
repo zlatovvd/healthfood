@@ -15,9 +15,9 @@ export const intakeAddThunk = createAsyncThunk(
 )
 
 export const intakeUpdateThunk = createAsyncThunk(
-    'intake/update', async (userId, values, thunkAPI) => {
+    'intake/update', async (values, thunkAPI) => {
         try {
-            const {data} = await fetchApi.put(`/products/intake/${userId}`);
+            const {data} = await fetchApi(`/products/intake/${userId}`);
             console.log('update intake', data);
         } catch (e) {
             return thunkAPI.rejectWithValue(e.message);

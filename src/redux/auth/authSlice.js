@@ -43,8 +43,11 @@ const authSlice = createSlice({
       .addCase(authLogoutThunk.pending, state => {
         state.isLoading = true;
       })
-      .addCase(authLogoutThunk.fulfilled, (state, {payload}) => {
-        state = authInitialState;
+      .addCase(authLogoutThunk.fulfilled, (state, action) => {
+        state.user = { name: null, email: null };
+        state.token = '';
+        state.isLoggedIn = false;
+        state.isLoading = false;
       })
       .addCase(authLogoutThunk.rejected, state => {
         state.isLoading = false;
@@ -55,6 +58,7 @@ const authSlice = createSlice({
       })
       .addCase(authRefreshThunk.fulfilled, (state, {payload}) => {
         state.user = payload;
+        state.isLoggedIn = true;
         state.isLoading = false;
         state.isRefreshing = false;
       })
