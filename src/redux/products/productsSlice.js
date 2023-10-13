@@ -1,5 +1,5 @@
 const { createSlice } = require('@reduxjs/toolkit');
-const { getProductThunk } = require('./productsThunk');
+const { getProductThunk, getNotRecommendedProductsThunk } = require('./productsThunk');
 
 const productsInitialState = {
   data: null,
@@ -33,7 +33,17 @@ const productsSlice = createSlice({
       })
       .addCase(getProductThunk.rejected, state => {
         state.isLoading = false;
-      });
+      })
+      .addCase(getNotRecommendedProductsThunk.pending, state => {
+        state.isLoading = true;
+      })
+      .addCase(getNotRecommendedProductsThunk.fulfilled, (state, {payload} ) => {
+        state.isLoading = false;
+        state.data = {...state.data, notproducts:payload};
+      })
+      .addCase(getNotRecommendedProductsThunk.rejected, state => {
+        state.isLoading = false;
+      })
   },
 });
 

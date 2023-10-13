@@ -1,3 +1,4 @@
+import useCalculateCalories from 'functions/useCalculateCaories';
 import css from './RightSideBar.module.css';
 import { useSelector } from 'react-redux';
 import {
@@ -8,12 +9,16 @@ import {
   selectCalculateDailyCalories,
   selectNotRecommendedProducts,
 } from 'redux/products/productsSelector';
+import useNotRecommendedProduct from 'functions/useNotRecommendedProduct';
 
 const RightSideBar = () => {
   const diaryDate = useSelector(selectDiaryDateFormated);
   const totalCalories = useSelector(selectTotalCalories);
-  const calculateCalories = useSelector(selectCalculateDailyCalories);
-  const notRecommended = useSelector(selectNotRecommendedProducts);
+  //const calculateCalories = useSelector(selectCalculateDailyCalories);
+  //const notRecommended = useSelector(selectNotRecommendedProducts);
+
+  const calculateCalories = useCalculateCalories();
+  const notRecommended = useNotRecommendedProduct();
 
   console.log(notRecommended);
 

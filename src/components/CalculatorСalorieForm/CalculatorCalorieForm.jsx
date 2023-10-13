@@ -1,50 +1,44 @@
-import { useAuth } from 'hooks/useAuth';
 import css from './CalculatorCalorieForm.module.css';
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { selectPersonInfo } from 'redux/intake/intakeSelector';
-import { intakeAddThunk, intakeGetThunk, intakeUpdateThunk } from 'redux/intake/intakeThunk';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { intakeAddThunk, intakeUpdateThunk } from 'redux/intake/intakeThunk';
+import { useIntake } from 'hooks/useIntake';
+import AppSpinner from 'components/AppSpinner/AppSpiner';
 
 const CalculatorCalorieForm = () => {
-  const personInfo = useSelector(selectPersonInfo);
+  
+  const {personInfo, isLoading} = useIntake();
 
-  console.log(personInfo);
-
+  console.log('init', personInfo);
+  
   const [values, setValues] = useState(personInfo);
-
-  const {user} = useAuth();
+  
+  console.log('values init', values)
 
   const dispatch = useDispatch();
 
   const handleChange = event => {
     const { name, value } = event.target;
-
     setValues(prev => ({ ...prev, [name]: value }));
   };
 
   const onSubmit = event => {
     event.preventDefault();
-<<<<<<< HEAD
-    console.log('person', personInfo);
-    if (values._id) {
-      console.log('values id', values.owner);
-      
-      dispatch(intakeUpdateThunk(values._id, values));
-=======
-    if (values.owner) {
-      console.log('owner', values.owner);
-      dispatch(intakeUpdateThunk(values));
->>>>>>> a7234e7ecb50f58c0d4b2dd526a8d635991c96db
+    console.log('owner1', personInfo);
+    if (personInfo.owner) {
+      console.log('owner', values);
+      dispatch(intakeUpdateThunk(personInfo));
     } else {
-      dispatch(intakeAddThunk(values));
+      console.log('owner else', values);
+      //dispatch(intakeAddThunk(values));
     }
   };
 
-  useEffect(() => {
-    dispatch(intakeGetThunk());
-  }, [dispatch])
-
-  return (
+  
+  return ( 
+    <>
+         {isLoading && <AppSpinner/>}
+    
     <form className={css.calculateForm} onSubmit={onSubmit}>
       <h1 className={css.title}>
         Calculate your daily calorie intake right now
@@ -158,6 +152,8 @@ const CalculatorCalorieForm = () => {
         Start losing weight
       </button>
     </form>
+    </>
+
   );
 };
 

@@ -6,23 +6,24 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { intakeGetThunk } from 'redux/intake/intakeThunk';
 import { useIntake } from 'hooks/useIntake';
+import AppSpinner from 'components/AppSpinner/AppSpiner';
 
 const CalculatorPage = () => {
   const dispatch = useDispatch();
 
-  const { intakeIsLoading, intakePersonInfo } = useIntake();
+  const { isLoading } = useIntake();
 
   useEffect( () => {
     dispatch(intakeGetThunk());
   }, [dispatch]);
 
-  return  intakeIsLoading ? (
-    <b>...Loading</b>
-  ) : (
+  console.log('load', isLoading)
+
+  return   (
     <div className={css.calculatorPage}>
-      
+      {isLoading && <AppSpinner/>}    
       <CalculatorCalorieForm />
-      {/* <RightSideBar /> */}
+      <RightSideBar />
     </div>
   );
 };
