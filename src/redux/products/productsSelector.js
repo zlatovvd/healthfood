@@ -7,6 +7,8 @@ export const selectIsLoading = state => state.products.isLoading;
 
 export const selectFilter = state => state.products.filter;
 
+export const selectNotRecommendedProducts = state => state.products.notRecommended;
+
 const intakePersonInfo = useIntake;
 
 export const selectFilteredProducts = createSelector(
@@ -47,28 +49,28 @@ export const selectCalculateDailyCalories = createSelector(
     }
   );
   
-  export const selectNotRecommendedProducts = createSelector(
-    [selectProducts, intakePersonInfo],
-    (products, personInfo) => {
-      if (personInfo) {
-        const notRecommended = [];
-        console.log("SELECT", personInfo.intakePersonInfo);
-        const {typeblood} = personInfo.intakePersonInfo;
-        console.log("SELECT 2", typeblood, 'prod', products);
-        products.map(item => {
+  // export const selectNotRecommendedProducts = createSelector(
+  //   [selectProducts, intakePersonInfo],
+  //   (products, personInfo) => {
+  //     if (personInfo) {
+  //       const notRecommended = [];
+  //       console.log("SELECT", personInfo.intakePersonInfo);
+  //       const {typeblood} = personInfo.intakePersonInfo;
+  //       console.log("SELECT 2", typeblood, 'prod', products);
+  //       products.map(item => {
          
-          if (
-            item.groupBloodNotAllowed[typeblood] === true &&
-            !notRecommended.includes(item.categories[0])
-          ) {
-            notRecommended.push(item.categories[0]);
-          }
-        });
+  //         if (
+  //           item.groupBloodNotAllowed[typeblood] === true &&
+  //           !notRecommended.includes(item.categories[0])
+  //         ) {
+  //           notRecommended.push(item.categories[0]);
+  //         }
+  //       });
     
-        return notRecommended;
-      }
+  //       return notRecommended;
+  //     }
   
-      return [];
+  //     return [];
       
-    }
-  );
+  //   }
+  // );

@@ -1,14 +1,14 @@
-import { intakeGetThunk, intakeUpdateThunk } from "./intakeThunk";
+import { intakeAddThunk, intakeGetThunk, intakeUpdateThunk } from "./intakeThunk";
 
 const { createSlice } = require("@reduxjs/toolkit");
 
 const initIntake = {
     isLoading: false,
     personInfo: {
-      height: '178',
-      age: '50',
-      cweight: '95',
-      dweight: '85',
+      height: '0',
+      age: '0',
+      cweight: '0',
+      dweight: '0',
       typeblood: 1,
     },
   };
@@ -35,7 +35,17 @@ const intakeSlice = createSlice({
       .addCase(intakeGetThunk, state => {
         state.isLoading = false;
       })
-      builder.addCase(intakeUpdateThunk.pending, state => {
+      .addCase(intakeAddThunk.pending, state => {
+        state.isLoading = true;
+      })
+      .addCase(intakeAddThunk.fulfilled, (state, {payload}) => {
+        state.personInfo = payload;
+        state.isLoading = false;
+      })
+      .addCase(intakeAddThunk.rejected, state => {
+        state.isLoading = false;
+      })
+      .addCase(intakeUpdateThunk.pending, state => {
         state.isLoading = true;
       })
       .addCase(intakeUpdateThunk.fulfilled, (state, {payload}) => {

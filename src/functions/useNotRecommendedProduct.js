@@ -9,7 +9,7 @@ const useNotRecommendedProduct = () => {
 
     const dispatch = useDispatch();
 
-    const notRecommended = dispatch(getNotRecommendedProductsThunk(personInfo.typeblood));
+    const notRecommended = dispatch(getNotRecommendedProductsThunk(1));
 
     return {notRecommended};
 

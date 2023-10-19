@@ -9,8 +9,6 @@ const CalculatorCalorieForm = () => {
   
   const {personInfo, isLoading} = useIntake();
 
-  console.log('init', personInfo);
-  
   const [values, setValues] = useState(personInfo);
   
   console.log('values init', values)
@@ -24,13 +22,10 @@ const CalculatorCalorieForm = () => {
 
   const onSubmit = event => {
     event.preventDefault();
-    console.log('owner1', personInfo);
     if (personInfo.owner) {
-      console.log('owner', values);
-      dispatch(intakeUpdateThunk(personInfo));
+      dispatch(intakeUpdateThunk(values));
     } else {
-      console.log('owner else', values);
-      //dispatch(intakeAddThunk(values));
+      dispatch(intakeAddThunk(values));
     }
   };
 

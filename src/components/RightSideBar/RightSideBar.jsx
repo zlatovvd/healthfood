@@ -5,22 +5,17 @@ import {
   selectDiaryDateFormated,
   selectTotalCalories,
 } from 'redux/diary/diarySelector';
-import {
-  selectCalculateDailyCalories,
-  selectNotRecommendedProducts,
-} from 'redux/products/productsSelector';
-import useNotRecommendedProduct from 'functions/useNotRecommendedProduct';
+import { useIntake } from 'hooks/useIntake';
 
 const RightSideBar = () => {
+
   const diaryDate = useSelector(selectDiaryDateFormated);
   const totalCalories = useSelector(selectTotalCalories);
-  //const calculateCalories = useSelector(selectCalculateDailyCalories);
-  //const notRecommended = useSelector(selectNotRecommendedProducts);
+  const {personInfo} = useIntake();
 
   const calculateCalories = useCalculateCalories();
-  const notRecommended = useNotRecommendedProduct();
 
-  console.log(notRecommended);
+  console.log('total',  totalCalories);
 
   return (
     <div className={css.rightSideBar}>
@@ -59,8 +54,8 @@ const RightSideBar = () => {
         </div>
         <div className={css.summaryRightWrapper}>
           <h2 className={css.summaryTitle}>Food not recommended</h2>
-          {notRecommended.length > 0 ? (
-            notRecommended.map(item => (
+          {personInfo.notproducts ? (
+            personInfo.notproducts.map(item => (
               <p className={css.notRecommended} key={item}>
                 {item}
               </p>

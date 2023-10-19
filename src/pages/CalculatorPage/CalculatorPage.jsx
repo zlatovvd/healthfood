@@ -22,8 +22,11 @@ const CalculatorPage = () => {
   return   (
     <div className={css.calculatorPage}>
       {isLoading && <AppSpinner/>}    
-      <CalculatorCalorieForm />
-      <RightSideBar />
+      {!isLoading &&
+        <><CalculatorCalorieForm />
+        <RightSideBar /></>
+      }
+      
     </div>
   );
 };

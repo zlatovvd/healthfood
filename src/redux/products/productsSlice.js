@@ -3,6 +3,7 @@ const { getProductThunk, getNotRecommendedProductsThunk } = require('./productsT
 
 const productsInitialState = {
   data: null,
+  notRecommended: [],
   isLoading: false,
   filter: ''
 };
@@ -39,7 +40,7 @@ const productsSlice = createSlice({
       })
       .addCase(getNotRecommendedProductsThunk.fulfilled, (state, {payload} ) => {
         state.isLoading = false;
-        state.data = {...state.data, notproducts:payload};
+        state.notRecommended = payload;
       })
       .addCase(getNotRecommendedProductsThunk.rejected, state => {
         state.isLoading = false;
