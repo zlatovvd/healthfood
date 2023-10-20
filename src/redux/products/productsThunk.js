@@ -14,6 +14,17 @@ export const getProductThunk = createAsyncThunk(
     }
 ) 
 
+export const getProductByNameThunk = createAsyncThunk(
+    'products/search', async (name, thunkAPI) => {
+        try {
+            const result = await fetchApi.get(`/products/search/${name}`);
+            console.log('search', result);
+        } catch (e) {
+            return thunkAPI.rejectWithValue(e);
+        }
+    }
+)
+
 export const getNotRecommendedProductsThunk = createAsyncThunk(
     'products/notrecommended', async (typeblood, thunkAPI) => {
         try {

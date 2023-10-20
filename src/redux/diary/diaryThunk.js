@@ -21,7 +21,7 @@ export const diaryGetProductThunk = createAsyncThunk(
     try {
       const res = await fetchApi.get(`/daily/${date}`);
 
-      console.log(res.data);
+      console.log('diary get', res.data);
       return res.data;
     } catch (error) {
       thunkAPI.rejectWithValue(error.message);

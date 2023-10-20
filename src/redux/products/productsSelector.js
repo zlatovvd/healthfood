@@ -14,8 +14,14 @@ const intakePersonInfo = useIntake;
 export const selectFilteredProducts = createSelector(
   [selectProducts, selectFilter],
   (products, filter) => {
-    return products.filter(item =>
-      item.title.ua.toLowerCase().includes(filter.toLowerCase())
+    console.log('FILTER', filter);
+    console.log('FILTER ptoduct', products);
+    if (!products) {
+      return [];
+    }
+    return products.filter(item =>{
+      console.log('item filter', item);
+      item.title.ua.toLowerCase().includes(filter.toLowerCase())}
     );
   }
 );
@@ -23,6 +29,9 @@ export const selectFilteredProducts = createSelector(
 export const selectFoundProduct = createSelector(
   [selectProducts, selectFilter],
   (products, filter) => {
+    if (!products) {
+      return [];
+    }
     return products.find(
       option => option.title.ua.toLowerCase() === filter.toLowerCase()
     );

@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux';
 import { intakeGetThunk } from 'redux/intake/intakeThunk';
 import { useIntake } from 'hooks/useIntake';
 import AppSpinner from 'components/AppSpinner/AppSpiner';
+import { diaryAddProductThunk, diaryDelProductThunk, diaryGetProductThunk } from 'redux/diary/diaryThunk';
 
 const CalculatorPage = () => {
   const dispatch = useDispatch();
@@ -15,6 +16,7 @@ const CalculatorPage = () => {
 
   useEffect( () => {
     dispatch(intakeGetThunk());
+    dispatch(diaryGetProductThunk('2023-10-20'));
   }, [dispatch]);
 
   console.log('load', isLoading)

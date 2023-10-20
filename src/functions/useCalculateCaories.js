@@ -4,6 +4,8 @@ const useCalculateCalories = () => {
 
     const {personInfo} = useIntake();
 
+    console.log('use Calc', personInfo);
+
     if(personInfo) {
 
         const { height, age, cweight, dweight } = personInfo;
