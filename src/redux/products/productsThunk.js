@@ -19,6 +19,7 @@ export const getProductByNameThunk = createAsyncThunk(
         try {
             const result = await fetchApi.get(`/products/search/${name}`);
             console.log('search', result);
+            return result.data;
         } catch (e) {
             return thunkAPI.rejectWithValue(e);
         }

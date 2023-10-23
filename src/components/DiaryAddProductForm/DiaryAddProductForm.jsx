@@ -9,7 +9,10 @@ import { setFilter } from 'redux/products/productsSlice';
 import {
   selectFilteredProducts,
   selectFoundProduct,
+  selectProducts,
 } from 'redux/products/productsSelector';
+import { getProductByNameThunk } from 'redux/products/productsThunk';
+import { useProducts } from 'hooks/useProducts';
 
 const DiaryAddProductForm = () => {
   const [product, setProduct] = useState('');
@@ -17,16 +20,20 @@ const DiaryAddProductForm = () => {
   const [isOpen, setIsOpen] = useState(true);
 
   const dispatch = useDispatch();
-  const filteredProducts = useSelector(selectFilteredProducts);
+  const products = useSelector(selectProducts);
   const foundProduct = useSelector(selectFoundProduct);
   const diaryDate = useSelector(selectDiaryDate);
   const isModalOpen = useSelector(selectIsOpen);
 
+  const {isLoading, data} = useProducts();
+
   const handleChange = event => {
     const { name, value } = event.target;
+    console.log('name', value);
     switch (name) {
       case 'product':
-        dispatch(setFilter(value));
+        //dispatch(setFilter(value));
+        dispatch(getProductByNameThunk(value));
         setProduct(value);
         break;
       case 'grams':
@@ -34,6 +41,7 @@ const DiaryAddProductForm = () => {
         break;
       default:
     }
+    
   };
 
   const handlerClickItem = event => {
@@ -81,9 +89,9 @@ const DiaryAddProductForm = () => {
         />
       </label>
 
-      {product && isOpen ? (
+      {product && isOpen &&!isLoading ? (
         <ul className={css.autocomplete}>
-          {filteredProducts.map(item => (
+          {data.map(item => (
             <li
               className={css.autocompleteItem}
               key={item._id.$oid}
