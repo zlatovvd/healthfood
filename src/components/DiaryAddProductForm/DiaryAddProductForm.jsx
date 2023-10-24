@@ -6,33 +6,26 @@ import { diaryAddProductThunk } from 'redux/diary/diaryThunk';
 import { selectIsOpen } from 'redux/modal/modalSelector';
 import { open } from 'redux/modal/modalSlice';
 import { setFilter } from 'redux/products/productsSlice';
-import {
-  selectFilteredProducts,
-  selectFoundProduct,
-  selectProducts,
-} from 'redux/products/productsSelector';
 import { getProductByNameThunk } from 'redux/products/productsThunk';
 import { useProducts } from 'hooks/useProducts';
 
 const DiaryAddProductForm = () => {
   const [product, setProduct] = useState('');
   const [grams, setGrams] = useState('');
-  const [isOpen, setIsOpen] = useState(true);
+  const [isAutocompliteOpen, setIsAutocompliteOpen] = useState(true);
 
   const dispatch = useDispatch();
-  const products = useSelector(selectProducts);
-  const foundProduct = useSelector(selectFoundProduct);
+
   const diaryDate = useSelector(selectDiaryDate);
+  //const diaryDate = '2023-10-23';
   const isModalOpen = useSelector(selectIsOpen);
 
-  const {isLoading, data} = useProducts();
+  const {isLoading, data, choiceProduct} = useProducts();
 
   const handleChange = event => {
     const { name, value } = event.target;
-    console.log('name', value);
     switch (name) {
       case 'product':
-        //dispatch(setFilter(value));
         dispatch(getProductByNameThunk(value));
         setProduct(value);
         break;
@@ -47,22 +40,24 @@ const DiaryAddProductForm = () => {
   const handlerClickItem = event => {
     dispatch(setFilter(event.target.textContent));
     setProduct(event.target.textContent);
-    setIsOpen(!isOpen);
+    setIsAutocompliteOpen(!isAutocompliteOpen);
   };
 
   const handlerClickInput = () => {
-    setIsOpen(true);
+    setIsAutocompliteOpen(true);
   };
+
+  const calculateCalories = () => {
+    const { calories,  weight } = choiceProduct;
+    return Math.round((calories*grams)/weight);    
+  }
 
   const onSubmit = event => {
     event.preventDefault();
     resetForm();
-    
-    const { calories,  weight } = foundProduct;
+    console.log('diary date save', diaryDate);
+    dispatch(diaryAddProductThunk({ name: product, weight: grams, callories: calculateCalories(), date: new Date(diaryDate) }));
 
-    const calculateCalories = Math.round((calories*grams)/weight);
-
-    dispatch(diaryAddProductThunk({ name: product, weight: grams, callories: calculateCalories, date: diaryDate }));
     if (isModalOpen) {
       dispatch(open(false));
     }
@@ -72,6 +67,8 @@ const DiaryAddProductForm = () => {
     setProduct('');
     setGrams('');
   };
+
+  console.log('date', diaryDate);
 
   return (
     <form onSubmit={onSubmit} className={css.form}>
@@ -89,12 +86,14 @@ const DiaryAddProductForm = () => {
         />
       </label>
 
-      {product && isOpen &&!isLoading ? (
+      {isLoading && <b>Products id loading</b>}
+
+      {product && isAutocompliteOpen &&!isLoading ? (
         <ul className={css.autocomplete}>
           {data.map(item => (
             <li
               className={css.autocompleteItem}
-              key={item._id.$oid}
+              key={item._id}
               onClick={handlerClickItem}
             >
               {item.title.ua}

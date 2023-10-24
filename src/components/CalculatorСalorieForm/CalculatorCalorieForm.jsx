@@ -11,8 +11,6 @@ const CalculatorCalorieForm = () => {
 
   const [values, setValues] = useState(personInfo);
   
-  console.log('values init', values)
-
   const dispatch = useDispatch();
 
   const handleChange = event => {

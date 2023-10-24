@@ -1,51 +1,43 @@
 import useCalculateCalories from 'functions/useCalculateCaories';
 import css from './RightSideBar.module.css';
-import { useSelector } from 'react-redux';
-import {
-  selectDiaryDateFormated,
-  selectTotalCalories,
-} from 'redux/diary/diarySelector';
 import { useIntake } from 'hooks/useIntake';
+import { useDiary } from 'hooks/useDiary';
 
 const RightSideBar = () => {
-
-  const diaryDate = useSelector(selectDiaryDateFormated);
-  const totalCalories = useSelector(selectTotalCalories);
-  const {personInfo} = useIntake();
+  const { totalCallories, diaryDateFormated } = useDiary();
+  const { personInfo } = useIntake();
 
   const calculateCalories = useCalculateCalories();
-
-  console.log('total',  totalCalories);
 
   return (
     <div className={css.rightSideBar}>
       <div className={css.container}>
         <div className={css.summaryLeftWrapper}>
-          <h2 className={css.summaryTitle}>Summary for {diaryDate}</h2>
+          <h2 className={css.summaryTitle}>Summary for {diaryDateFormated}</h2>
           <ul className={css.summaryList}>
             <li className={css.summaryListItem}>
               <span className={css.summaryText}>Left</span>
               <span className={css.summaryValue}>
-                {(Math.round(calculateCalories - totalCalories)) || '000'} kcal
+                {Math.round(calculateCalories - totalCallories) || '000'} kcal
               </span>
             </li>
             <li className={css.summaryListItem}>
               <span className={css.summaryText}>Consumed</span>
               <span className={css.summaryValue}>
-                {(Math.round(totalCalories)) || '000'} kcal
+                {Math.round(totalCallories) || '000'} kcal
               </span>
             </li>
             <li className={css.summaryListItem}>
               <span className={css.summaryText}>Daily rate</span>
               <span className={css.summaryValue}>
-                {(Math.round(calculateCalories)) || '000'} kcal
+                {Math.round(calculateCalories) || '000'} kcal
               </span>
             </li>
             <li className={css.summaryListItem}>
               <span className={css.summaryText}>n% of normal</span>
               <span className={css.summaryValue}>
                 {calculateCalories > 0
-                  ? ((totalCalories * 100) / calculateCalories).toFixed(2)
+                  ? ((totalCallories * 100) / calculateCalories).toFixed(2)
                   : 0}
                 %
               </span>

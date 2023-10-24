@@ -1,23 +1,28 @@
-import { useSelector } from 'react-redux';
 import css from './DailyCalorieIntake.module.css';
-import {
-  selectCalculateDailyCalories,
-  selectNotRecommendedProducts,
-} from 'redux/products/productsSelector';
 import { useNavigate } from 'react-router-dom';
+import useCalculateCalories from 'functions/useCalculateCaories';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { getNotRecommendedProductsThunk } from 'redux/products/productsThunk';
+import useNotRecommendedProduct from 'functions/useNotRecommendedProduct';
 
 const DailyCalorieIntake = ({close}) => {
-  const calories = useSelector(selectCalculateDailyCalories);
-  const notRecommended = useSelector(selectNotRecommendedProducts);
+  
+  const calories = useCalculateCalories();
+  const notRecommended = useNotRecommendedProduct();
 
-  console.log("INTAJE " , calories);
-
+  const dispatch = useDispatch();
+  
   const navigate = useNavigate();
 
   const handleModalBtn = () => {
     close();
     navigate('/login');
   }
+
+  useEffect(() => {
+    dispatch(getNotRecommendedProductsThunk(1))
+  }, [dispatch]);
 
   return (
     <>

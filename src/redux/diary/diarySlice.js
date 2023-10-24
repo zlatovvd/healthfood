@@ -12,7 +12,7 @@ const getToday = () => {
   const year = date.getFullYear();
 
   const month =
-    date.getMonth() < 10 ? `0${date.getMonth() + 1}` : date.getMonth();
+    date.getMonth() + 1 < 10 ? `0${date.getMonth() + 1}` : date.getMonth() + 1;
   const day = date.getDate();
   const today = `${year}-${month}-${day}`;
 
@@ -28,6 +28,14 @@ const initDiaryState = {
 const diarySlice = createSlice({
   name: 'diary',
   initialState: initDiaryState,
+  reducers: {
+    setDiaryDate: {
+      reducer(state, {payload}) {
+        console.log('diary payload', payload);
+        state.diaryDate = payload;
+      }
+    }
+  },
   extraReducers: builder => {
     builder
       .addCase(diaryAddProductThunk.pending, state => {
@@ -39,7 +47,7 @@ const diarySlice = createSlice({
         console.log('payload', payload);
       })
       .addCase(diaryAddProductThunk.rejected, state => {
-        state.staus = 'error';
+        state.status = 'error';
       })
       .addCase(diaryGetProductThunk.pending, state => {
         state.status = 'loading';
@@ -67,4 +75,4 @@ const diarySlice = createSlice({
 
 export const diaryReducer = diarySlice.reducer;
 
-export const { addDiary, removeDiary } = diarySlice.actions;
+export const { addDiary, removeDiary, setDiaryDate } = diarySlice.actions;

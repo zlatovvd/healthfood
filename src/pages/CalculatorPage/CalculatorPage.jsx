@@ -7,28 +7,29 @@ import { useDispatch } from 'react-redux';
 import { intakeGetThunk } from 'redux/intake/intakeThunk';
 import { useIntake } from 'hooks/useIntake';
 import AppSpinner from 'components/AppSpinner/AppSpiner';
-import { diaryAddProductThunk, diaryDelProductThunk, diaryGetProductThunk } from 'redux/diary/diaryThunk';
+import { diaryGetProductThunk } from 'redux/diary/diaryThunk';
+import { useDiary } from 'hooks/useDiary';
 
 const CalculatorPage = () => {
   const dispatch = useDispatch();
 
   const { isLoading } = useIntake();
+  const { diaryDate } = useDiary();
 
-  useEffect( () => {
+  useEffect(() => {
     dispatch(intakeGetThunk());
-    dispatch(diaryGetProductThunk('2023-10-20'));
-  }, [dispatch]);
+    dispatch(diaryGetProductThunk(diaryDate));
+  }, [dispatch, diaryDate]);
 
-  console.log('load', isLoading)
-
-  return   (
+  return (
     <div className={css.calculatorPage}>
-      {isLoading && <AppSpinner/>}    
-      {!isLoading &&
-        <><CalculatorCalorieForm />
-        <RightSideBar /></>
-      }
-      
+      {isLoading && <AppSpinner />}
+      {!isLoading && (
+        <>
+          <CalculatorCalorieForm />
+          <RightSideBar />
+        </>
+      )}
     </div>
   );
 };

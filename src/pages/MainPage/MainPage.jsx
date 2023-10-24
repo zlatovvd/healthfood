@@ -7,7 +7,7 @@ const MainPage = () => {
   return (
     <div className={css.mainPage}>
       <Container>
-        <Loader />
+        {/* <Loader /> */}
         <DailyCaloriesForm />
       </Container>
     </div>
