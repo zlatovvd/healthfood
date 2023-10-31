@@ -4,9 +4,8 @@ import { fetchApi } from "http/http";
 export const getProductThunk = createAsyncThunk(
     'products/get', async (_, thunkAPI) => {
         try {
-
-            const result = await fetchApi.get('/products');
-            return result.data;
+            const {data} = await fetchApi.get('/products');
+            return data;
 
         } catch (e) {
             return thunkAPI.rejectWithValue(e);
@@ -17,8 +16,8 @@ export const getProductThunk = createAsyncThunk(
 export const getProductByNameThunk = createAsyncThunk(
     'products/search', async (name, thunkAPI) => {
         try {
-            const result = await fetchApi.get(`/products/search/${name}`);
-            return result.data;
+            const {data} = await fetchApi.get(`/products/search/${name}`);
+            return data;
         } catch (e) {
             return thunkAPI.rejectWithValue(e);
         }
@@ -28,10 +27,8 @@ export const getProductByNameThunk = createAsyncThunk(
 export const getNotRecommendedProductsThunk = createAsyncThunk(
     'products/notrecommended', async (typeblood, thunkAPI) => {
         try {
-
-            const result = await fetchApi.get(`/products/intake/${typeblood}`);
-            console.log('notrecom ', result.data);
-            return result.data;
+            const {data} = await fetchApi.get(`/products/intake/${typeblood}`);
+            return data;
         } catch (e) {
             return thunkAPI.rejectWithValue(e);
         }

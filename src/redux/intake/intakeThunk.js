@@ -40,7 +40,6 @@ export const intakeGetThunk = createAsyncThunk(
             const {data} = await fetchApi.get('/products/intake');
 
             if(!data) {
-                console.log('not data')
                 return personInfo;
             }
             return data;

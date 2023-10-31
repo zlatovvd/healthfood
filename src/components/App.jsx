@@ -1,5 +1,4 @@
 import { Route, Routes } from 'react-router-dom';
-import Loader from './Loader/Loader';
 import { ChakraProvider } from '@chakra-ui/react';
 import { PublicRoute, PrivateRoute } from './AuthRouts';
 import NotFound from 'pages/NotFound/NotFound';
@@ -23,19 +22,23 @@ export const App = () => {
 
   const dispatch = useDispatch();
 
-  const {isRefreshing} = useAuth();
+  const {isLoading, isLoggedIn, isRefreshing} = useAuth();
 
   useEffect(() => {
     dispatch(authRefreshThunk());
   }, [dispatch]);
 
+  console.log('login', isLoggedIn);
+  console.log('refresh', isRefreshing);
+
   return (
-    isRefreshing ? <b>Refreshing ...</b> :
+    isLoading ? <b>Refreshing ...</b> :
     <ChakraProvider>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<MainPage />} />
+          {/* <Route index element={<MainPage />} /> */}
           <Route path="" element={<PublicRoute />}>
+            <Route path ="/" element= {<MainPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/registration" element={<RegistrationPage />} />
           </Route>

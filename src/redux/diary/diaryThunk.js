@@ -5,9 +5,8 @@ export const diaryAddProductThunk = createAsyncThunk(
   'diary/add',
   async (values, thunkAPI) => {      
     try {
-        const res = await fetchApi.post('/daily/', values);
-        console.log(res);
-        return res.data;
+        const {data} = await fetchApi.post('/daily/', values);
+        return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
@@ -19,11 +18,8 @@ export const diaryGetProductThunk = createAsyncThunk(
   async (date, thunkAPI) => {
     
     try {
-      const res = await fetchApi.get(`/daily/${date}`);
-
-      console.log('diary date', date);
-      console.log('diary get', res);
-      return res.data;
+      const {data} = await fetchApi.get(`/daily/${date}`);
+      return data;
     } catch (error) {
       thunkAPI.rejectWithValue(error.message);
     }
@@ -33,8 +29,8 @@ export const diaryGetProductThunk = createAsyncThunk(
 export const diaryDelProductThunk = createAsyncThunk(
     'diary/del', async (productId, thunkAPI) => {
         try {
-            const res = await fetchApi.delete(`/daily/${productId}`);
-            return res.data;
+            const {data} = await fetchApi.delete(`/daily/${productId}`);
+            return data;
 
         } catch (error) {
             thunkAPI.rejectWithValue(error.message);

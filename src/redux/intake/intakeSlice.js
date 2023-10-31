@@ -19,7 +19,6 @@ const intakeSlice = createSlice({
     reducers: {
         addPersonInfo: {
             reducer(state, { payload }) {
-              console.log('payload intake', payload)
               state.personInfo = payload;
             },
           },

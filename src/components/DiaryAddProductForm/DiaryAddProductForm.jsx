@@ -1,13 +1,13 @@
 import css from './DiaryAddProductForm.module.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectDiaryDate } from 'redux/diary/diarySelector';
 import { diaryAddProductThunk } from 'redux/diary/diaryThunk';
 import { selectIsOpen } from 'redux/modal/modalSelector';
 import { open } from 'redux/modal/modalSlice';
 import { setFilter } from 'redux/products/productsSlice';
 import { getProductByNameThunk } from 'redux/products/productsThunk';
 import { useProducts } from 'hooks/useProducts';
+import { useDiary } from 'hooks/useDiary';
 
 const DiaryAddProductForm = () => {
   const [product, setProduct] = useState('');
@@ -16,11 +16,11 @@ const DiaryAddProductForm = () => {
 
   const dispatch = useDispatch();
 
-  const diaryDate = useSelector(selectDiaryDate);
-  //const diaryDate = '2023-10-23';
   const isModalOpen = useSelector(selectIsOpen);
 
-  const {isLoading, data, choiceProduct} = useProducts();
+  const { diaryDate } = useDiary();
+
+  const { isLoading, data, choiceProduct } = useProducts();
 
   const handleChange = event => {
     const { name, value } = event.target;
@@ -34,7 +34,6 @@ const DiaryAddProductForm = () => {
         break;
       default:
     }
-    
   };
 
   const handlerClickItem = event => {
@@ -48,15 +47,22 @@ const DiaryAddProductForm = () => {
   };
 
   const calculateCalories = () => {
-    const { calories,  weight } = choiceProduct;
-    return Math.round((calories*grams)/weight);    
-  }
+    const { calories, weight } = choiceProduct;
+    return Math.round((calories * grams) / weight);
+  };
 
   const onSubmit = event => {
     event.preventDefault();
     resetForm();
     console.log('diary date save', diaryDate);
-    dispatch(diaryAddProductThunk({ name: product, weight: grams, callories: calculateCalories(), date: new Date(diaryDate) }));
+    dispatch(
+      diaryAddProductThunk({
+        name: product,
+        weight: grams,
+        callories: calculateCalories(),
+        date: new Date(diaryDate),
+      })
+    );
 
     if (isModalOpen) {
       dispatch(open(false));
@@ -67,8 +73,6 @@ const DiaryAddProductForm = () => {
     setProduct('');
     setGrams('');
   };
-
-  console.log('date', diaryDate);
 
   return (
     <form onSubmit={onSubmit} className={css.form}>
@@ -88,7 +92,7 @@ const DiaryAddProductForm = () => {
 
       {isLoading && <b>Products id loading</b>}
 
-      {product && isAutocompliteOpen &&!isLoading ? (
+      {product && isAutocompliteOpen && !isLoading ? (
         <ul className={css.autocomplete}>
           {data.map(item => (
             <li

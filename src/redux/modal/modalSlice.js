@@ -8,7 +8,6 @@ const modalSlice = createSlice({
     reducers: {
         open: {
             reducer(state, {payload}) {
-                console.log('modalSlice payload', payload);
                 state.isOpen = payload;
             }
         }

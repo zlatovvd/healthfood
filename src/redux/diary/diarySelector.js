@@ -6,7 +6,6 @@ export const selectDiaryDate = state => state.diary.diaryDate;
 
 export const selectTotalCallories = createSelector([selectDiary], diary => {
   let totalDiary = 0;
-  console.log('diary total', diary);
   diary.map(item => (
     totalDiary += item.callories
   ));
