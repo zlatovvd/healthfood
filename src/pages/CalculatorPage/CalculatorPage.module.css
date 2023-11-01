@@ -8,7 +8,7 @@
 @media screen and (min-width: 1280px) {
   .calculatorPage {
     display: flex;
-    justify-content: space-between;
+    justify-content:space-between;
     width: 1280px;
     padding-top: 0;
   }

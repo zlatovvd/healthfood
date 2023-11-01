@@ -7,6 +7,7 @@ import Layout from './Layout/Layout';
 import { useDispatch } from 'react-redux';
 import { authRefreshThunk } from 'redux/auth/authThunk';
 import { useAuth } from 'hooks/useAuth';
+import AppSpinner from './AppSpinner/AppSpiner';
 
 const MainPage = lazy(() => import('pages/MainPage/MainPage'));
 const LoginPage = lazy(() => import('pages/LoginPage/LoginPage'));
@@ -19,26 +20,22 @@ const CalculatorPage = lazy(() =>
 );
 
 export const App = () => {
-
   const dispatch = useDispatch();
 
-  const {isLoading, isLoggedIn, isRefreshing} = useAuth();
+  const { isLoading } = useAuth();
 
   useEffect(() => {
     dispatch(authRefreshThunk());
   }, [dispatch]);
 
-  console.log('login', isLoggedIn);
-  console.log('refresh', isRefreshing);
-
-  return (
-    isLoading ? <b>Refreshing ...</b> :
+  return isLoading ? (
+    <AppSpinner />
+  ) : (
     <ChakraProvider>
       <Routes>
         <Route path="/" element={<Layout />}>
-          {/* <Route index element={<MainPage />} /> */}
           <Route path="" element={<PublicRoute />}>
-            <Route path ="/" element= {<MainPage />} />
+            <Route path="/" element={<MainPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/registration" element={<RegistrationPage />} />
           </Route>
@@ -48,7 +45,7 @@ export const App = () => {
           </Route>
         </Route>
 
-        {/* <Route path="*" element={<NotFound/>} /> */}
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </ChakraProvider>
   );

@@ -7,7 +7,7 @@ const PublicRoute = () => {
     console.log('login публик', isLoggedIn);
     console.log('refresh публик', isRefreshing);
     
-    return (!user.name && !token ) ? <Outlet/> : <Navigate to="/calculator" />  
+    return (user.name && token ) ? <Navigate to="/calculator" /> : <Outlet/>
 
 }
 
