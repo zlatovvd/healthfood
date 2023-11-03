@@ -1,5 +1,5 @@
 .rightSideBar {
-    width: 320px;
+    max-width: 320px;
     background-color: #F0F1F3;
 }
 
@@ -56,7 +56,7 @@
 @media screen and (min-width: 768px) {
 
     .rightSideBar {
-        width: 768px;
+        max-width: 768px;
         background-image: url('images/layer-41-tablet.png');
         background-repeat: no-repeat;
         background-position: right bottom;
@@ -76,8 +76,9 @@
 
 @media screen and (min-width: 1280px) {
     .rightSideBar {
+        flex-grow: 1;
         padding-top: 293px;
-        width: 520px;
+        max-width: 520px;
         background-image: url('images/layer-desktop.png');
     }
 

@@ -9,6 +9,7 @@ const authInitialState = {
   isLoggedIn: false,
   isRefreshing: false,
   isLoading: false,
+  error: false,
 };
 
 const authSlice = createSlice({
@@ -37,7 +38,9 @@ const authSlice = createSlice({
         state.isLoggedIn = true;
         state.isLoading = false;
       })
-      .addCase(authLoginThunk.rejected, state => {
+      .addCase(authLoginThunk.rejected, (state, {payload}) => {
+        console.log('error payload', payload);
+        state.error = true;
         state.isLoading = false;
       })
       .addCase(authLogoutThunk.pending, state => {
@@ -57,7 +60,6 @@ const authSlice = createSlice({
         //state.isRefreshing = true;
       })
       .addCase(authRefreshThunk.fulfilled, (state, {payload}) => {
-        console.log('refreshing', payload);
         state.user = payload;
         state.isLoggedIn = true;
         state.isLoading = false;

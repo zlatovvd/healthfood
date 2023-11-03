@@ -27,7 +27,7 @@ const CalculatorCalorieForm = () => {
   };
 
   return (
-    <>
+    <div>
       {isLoading && <AppSpinner />}
 
       <form className={css.calculateForm} onSubmit={onSubmit}>
@@ -143,7 +143,7 @@ const CalculatorCalorieForm = () => {
           Start losing weight
         </button>
       </form>
-    </>
+    </div>
   );
 };
 

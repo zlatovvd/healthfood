@@ -3,6 +3,8 @@ import css from './LoginForm.module.css';
 import { useDispatch } from 'react-redux';
 import { authLoginThunk } from 'redux/auth/authThunk';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from 'hooks/useAuth';
+import { useToast } from '@chakra-ui/react';
 
 const initialState = {
   email: '',
@@ -12,6 +14,10 @@ const initialState = {
 const LoginForm = () => {
   
   const [values, setValues] = useState(initialState);
+  const {error} = useAuth();
+  const toast = useToast();
+
+  console.log('error', error);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -26,9 +32,26 @@ const LoginForm = () => {
   
   const handleRegisteBtn = () => {navigate('/registration');};
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    dispatch(authLoginThunk(values));
+    try {
+      await dispatch(authLoginThunk(values)).unwrap();
+      toast({
+        title: `User ${values} registered`,
+        position: 'top-right',
+        isClosable: true,
+        status: 'success',
+      });
+    } catch (e) {
+      console.log(e);
+      toast({
+        title: `Error ${e.message}`,
+        position: 'top-right',
+        isClosable: true,
+        status: 'error',
+      });
+    }
+    
   };
 
   return (
@@ -65,6 +88,7 @@ const LoginForm = () => {
           Register
         </button>
       </div>
+      {error && <b>Error</b>}
     </form>
   );
 };

@@ -1,4 +1,5 @@
 .calculateForm {
+  /* display: block; */
   padding-bottom: 41px;
 }
 
@@ -125,7 +126,7 @@
     align-items: flex-start;
     column-gap: 20px;
     height: 240px;
-    width: 530px;
+    min-width: 530px;
     margin-top: 68px;
   }
 
@@ -145,12 +146,16 @@
 
 @media screen and (min-width: 1280px) {
   .calculateForm {
-    width: 508px;
+    /* min-width: 808px; */
     padding-top: 293px;
     padding-bottom: 140px;
   }
 
   .submitBtn {
     margin-left: auto;
+  }
+
+  .formInput {
+    width: 200px;
   }
 }
