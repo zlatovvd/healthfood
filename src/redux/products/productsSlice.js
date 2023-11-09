@@ -42,7 +42,8 @@ const productsSlice = createSlice({
         state.data = payload;
         state.isLoading = false;
       })
-      .addCase(getProductByNameThunk.rejected, state => {
+      .addCase(getProductByNameThunk.rejected, (state, {payload}) => {
+        console.log('pauload pr', payload);
         state.isLoading = false;
       })
       .addCase(getNotRecommendedProductsThunk.pending, state => {

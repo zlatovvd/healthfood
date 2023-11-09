@@ -16,7 +16,6 @@ export const diaryAddProductThunk = createAsyncThunk(
 export const diaryGetProductThunk = createAsyncThunk(
   'diary/get',
   async (date, thunkAPI) => {
-    
     try {
       const {data} = await fetchApi.get(`/daily/${date}`);
       return data;
@@ -31,7 +30,6 @@ export const diaryDelProductThunk = createAsyncThunk(
         try {
             const {data} = await fetchApi.delete(`/daily/${productId}`);
             return data;
-
         } catch (error) {
             thunkAPI.rejectWithValue(error.message);
         }

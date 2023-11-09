@@ -1,6 +1,6 @@
 import css from './Modal.module.css';
 import ReactDOM from 'react-dom';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { open } from 'redux/modal/modalSlice';
 
@@ -18,11 +18,11 @@ const Modal = ({ close, children }) => {
     }, 250);
   };
 
-  const handleKeyEscape = event => {
+  const handleKeyEscape = useCallback((event) => {
     if (event.key === 'Escape') {
       closeModal();
     }
-  };
+  }, [closeModal]);
 
   const handleBackdropClick = event => {
     if (event.target === backdropRef.current) {

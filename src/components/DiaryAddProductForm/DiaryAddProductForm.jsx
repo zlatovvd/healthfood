@@ -8,9 +8,12 @@ import { setFilter } from 'redux/products/productsSlice';
 import { getProductByNameThunk } from 'redux/products/productsThunk';
 import { useProducts } from 'hooks/useProducts';
 import { useDiary } from 'hooks/useDiary';
+import { debounce } from 'lodash';
+import AppSpinner from 'components/AppSpinner/AppSpiner';
 
 const DiaryAddProductForm = () => {
   const [product, setProduct] = useState('');
+  const [debounceProduct, setDebounceProduct] = useState('');
   const [grams, setGrams] = useState('');
   const [isAutocompliteOpen, setIsAutocompliteOpen] = useState(true);
 
@@ -26,8 +29,8 @@ const DiaryAddProductForm = () => {
     const { name, value } = event.target;
     switch (name) {
       case 'product':
-        dispatch(getProductByNameThunk(value));
         setProduct(value);
+        debounceSearchProduct(value);
         break;
       case 'grams':
         setGrams(value);
@@ -35,6 +38,10 @@ const DiaryAddProductForm = () => {
       default:
     }
   };
+
+  const debounceSearchProduct = debounce(async (val) => {
+    setDebounceProduct(val);
+  }, 300);
 
   const handlerClickItem = event => {
     dispatch(setFilter(event.target.textContent));
@@ -54,7 +61,6 @@ const DiaryAddProductForm = () => {
   const onSubmit = event => {
     event.preventDefault();
     resetForm();
-    console.log('diary date save', diaryDate);
     dispatch(
       diaryAddProductThunk({
         name: product,
@@ -74,6 +80,11 @@ const DiaryAddProductForm = () => {
     setGrams('');
   };
 
+  useEffect(() => {
+    if(debounceProduct==='') return;
+    dispatch(getProductByNameThunk(debounceProduct));  
+  }, [debounceProduct, dispatch]);
+
   return (
     <form onSubmit={onSubmit} className={css.form}>
       <label className={css.inputLabel}>
@@ -90,9 +101,9 @@ const DiaryAddProductForm = () => {
         />
       </label>
 
-      {isLoading && <b>Products id loading</b>}
+      {isLoading && <AppSpinner />}
 
-      {product && isAutocompliteOpen && !isLoading ? (
+      {data && isAutocompliteOpen && !isLoading ? (
         <ul className={css.autocomplete}>
           {data.map(item => (
             <li
