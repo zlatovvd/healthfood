@@ -9,7 +9,6 @@ import { getProductByNameThunk } from 'redux/products/productsThunk';
 import { useProducts } from 'hooks/useProducts';
 import { useDiary } from 'hooks/useDiary';
 import { debounce } from 'lodash';
-import AppSpinner from 'components/AppSpinner/AppSpiner';
 
 const DiaryAddProductForm = () => {
   const [product, setProduct] = useState('');
@@ -21,7 +20,7 @@ const DiaryAddProductForm = () => {
 
   const isModalOpen = useSelector(selectIsOpen);
 
-  const { diaryDate } = useDiary();
+  const { diaryDate, isLoading: isDiaryLoading } = useDiary();
 
   const { isLoading, data, choiceProduct } = useProducts();
 
@@ -100,8 +99,6 @@ const DiaryAddProductForm = () => {
           required
         />
       </label>
-
-      {isLoading && <AppSpinner />}
 
       {data && isAutocompliteOpen && !isLoading ? (
         <ul className={css.autocomplete}>

@@ -23,6 +23,7 @@ const initDiaryState = {
   status: 'idle',
   data: [],
   diaryDate: getToday(),
+  isLoading: false,
 };
 
 const diarySlice = createSlice({
@@ -38,34 +39,43 @@ const diarySlice = createSlice({
   extraReducers: builder => {
     builder
       .addCase(diaryAddProductThunk.pending, state => {
-        state = 'loading';
+        state.status = 'loading';
+        state.isLoading = true;
       })
       .addCase(diaryAddProductThunk.fulfilled, (state, { payload }) => {
         state.status = 'success';
         state.data = [...state.data, payload];
+        state.isLoading = false;
       })
       .addCase(diaryAddProductThunk.rejected, state => {
         state.status = 'error';
+        state.isLoading = false;
       })
       .addCase(diaryGetProductThunk.pending, state => {
         state.status = 'loading';
+        state.isLoading = true;
       })
       .addCase(diaryGetProductThunk.fulfilled, (state, { payload }) => {
         state.status = 'success';
         state.data = payload;
+        state.isLoading = false;
       })
       .addCase(diaryGetProductThunk.rejected, state => {
         state.status = 'error';
+        state.isLoading = false;
       })
       .addCase(diaryDelProductThunk.pending, state => {
         state.status = 'loading';
+        state.isLoading = true;
       })
       .addCase(diaryDelProductThunk.fulfilled, (state, { payload }) => {
         state.status = 'success';
         state.data = state.data.filter(item => item._id !== payload._id);
+        state.isLoading = false;
       })
       .addCase(diaryDelProductThunk.rejected, state => {
         state.status = 'error';
+        state.isLoading = false;
       });
   },
   

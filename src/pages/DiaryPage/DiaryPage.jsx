@@ -1,9 +1,11 @@
+import AppSpinner from 'components/AppSpinner/AppSpiner';
 import css from './DiaryPage.module.css';
 import DiaryAddProductForm from 'components/DiaryAddProductForm/DiaryAddProductForm';
 import DiaryDateСalendar from 'components/DiaryDateСalendar/DiaryDateСalendar';
 import DiaryProductsList from 'components/DiaryProductsList/DiaryProductsList';
 import RightSideBar from 'components/RightSideBar/RightSideBar';
 import { useDiary } from 'hooks/useDiary';
+import { useProducts } from 'hooks/useProducts';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { diaryGetProductThunk } from 'redux/diary/diaryThunk';
@@ -15,8 +17,10 @@ const DiaryPage = () => {
   const isModalOpen = useSelector(selectIsOpen);
   const dispatch = useDispatch();
 
-  const { diaryDate } = useDiary();
+  const { diaryDate, isLoading: isDiaryLoading } = useDiary();
 
+  const { isLoading } = useProducts();
+  
   const handleAddClick = () => {
     dispatch(open(true));
   };
@@ -27,6 +31,7 @@ const DiaryPage = () => {
 
   return (
     <div className={css.diaryPage}>
+      {(isLoading || isDiaryLoading) && <AppSpinner />}
       <div className={css.diary}>
         <DiaryDateСalendar />
         <div

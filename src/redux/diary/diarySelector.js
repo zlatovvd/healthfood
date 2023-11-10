@@ -4,6 +4,8 @@ export const selectDiary = state => state.diary.data;
 
 export const selectDiaryDate = state => state.diary.diaryDate;
 
+export const selectIsLoading = state => state.diary.isLoading;
+
 export const selectTotalCallories = createSelector([selectDiary], diary => {
   let totalDiary = 0;
   diary.map(item => (
