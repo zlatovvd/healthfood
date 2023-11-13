@@ -26,8 +26,9 @@ const authSlice = createSlice({
         state.isLoggedIn = true;
         state.isLoading = false;
       })
-      .addCase(authRegisterThunk.rejected, state => {
+      .addCase(authRegisterThunk.rejected, (state, {payload}) => {
         state.isLoading = false;
+        console.log('pay register', payload);
       })
       .addCase(authLoginThunk.pending, state => {
         state.isLoading = true;
@@ -64,10 +65,13 @@ const authSlice = createSlice({
         state.isLoggedIn = true;
         state.isLoading = false;
         state.isRefreshing = true;
+        console.log('pay aust', payload);
       })
-      .addCase(authRefreshThunk.rejected, state => {
+      .addCase(authRefreshThunk.rejected, (state, {payload}) => {
         state.isLoading = false;
         state.isRefreshing = false;
+        state.user = { name: null, email: null };
+        state.token = '';
       })
   },
 });

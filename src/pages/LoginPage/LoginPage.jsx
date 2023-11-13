@@ -7,7 +7,7 @@ import AppSpinner from 'components/AppSpinner/AppSpiner';
 
 const LoginPage = () => {
 
-  const {isLoading} = useAuth;
+  const {isLoading} = useAuth();
 
   return (
     <div className={css.loginPage}>

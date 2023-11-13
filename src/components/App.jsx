@@ -7,7 +7,6 @@ import Layout from './Layout/Layout';
 import { useDispatch } from 'react-redux';
 import { authRefreshThunk } from 'redux/auth/authThunk';
 import { useAuth } from 'hooks/useAuth';
-import AppSpinner from './AppSpinner/AppSpiner';
 
 const MainPage = lazy(() => import('pages/MainPage/MainPage'));
 const LoginPage = lazy(() => import('pages/LoginPage/LoginPage'));
@@ -22,15 +21,16 @@ const CalculatorPage = lazy(() =>
 export const App = () => {
   const dispatch = useDispatch();
 
-  const { isLoading } = useAuth();
-
   useEffect(() => {
-    dispatch(authRefreshThunk());
+    try {
+      dispatch(authRefreshThunk());
+    } catch (e) {
+      console.log('error refresh');
+    }
+    
   }, [dispatch]);
 
-  return isLoading ? (
-    <AppSpinner />
-  ) : (
+  return (
     <ChakraProvider>
       <Routes>
         <Route path="/" element={<Layout />}>

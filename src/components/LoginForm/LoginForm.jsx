@@ -14,11 +14,7 @@ const initialState = {
 const LoginForm = () => {
   
   const [values, setValues] = useState(initialState);
-  const {error} = useAuth();
   const toast = useToast();
-
-  console.log('error', error);
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -37,7 +33,7 @@ const LoginForm = () => {
     try {
       await dispatch(authLoginThunk(values)).unwrap();
       toast({
-        title: `User ${values} registered`,
+        title: `User ${values.email} logined`,
         position: 'top-right',
         isClosable: true,
         status: 'success',
@@ -88,7 +84,6 @@ const LoginForm = () => {
           Register
         </button>
       </div>
-      {error && <b>Error</b>}
     </form>
   );
 };

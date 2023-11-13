@@ -3,6 +3,9 @@ import css from './RegistrationForm.module.css';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { authRegisterThunk } from 'redux/auth/authThunk';
+import { useToast } from '@chakra-ui/react';
+import { useAuth } from 'hooks/useAuth';
+import AppSpinner from 'components/AppSpinner/AppSpiner';
 
 const initialState = {
   name: '',
@@ -16,6 +19,8 @@ const RegistrationForm = () => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const {isLoading} = useAuth();
+  const toast = useToast();
 
   const handleOnChange = event => {
     const { name, value } = event.target;
@@ -26,13 +31,30 @@ const RegistrationForm = () => {
     navigate('/login');
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    dispatch(authRegisterThunk(values));
+    try {
+      await dispatch(authRegisterThunk(values)).unwrap();
+      toast({
+        title: `User ${values.name} registered`,
+        position: 'top-right',
+        isClosable: true,
+        status: 'success',
+      });
+    } catch (e) {
+      toast({
+        title: `Error ${e}`,
+        position: 'top-right',
+        isClosable: true,
+        status: 'error',
+      });
+    }
+    
   };
 
   return (
     <form onSubmit={handleSubmit} className={css.registerForm}>
+      {isLoading && <AppSpinner/>}
       <h2 className={css.title}>Register</h2>
       <label className={css.formLabel}>
         "Name*
