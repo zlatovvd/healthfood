@@ -18,7 +18,8 @@ export const authRegisterThunk = createAsyncThunk(
             setAuthHeader(data.token);
             return data;
         } catch (e) {
-            return thunkAPI.rejectWithValue(e.message);
+            return thunkAPI.rejectWithValue(e);
+            //return e;
         }
 
     }
