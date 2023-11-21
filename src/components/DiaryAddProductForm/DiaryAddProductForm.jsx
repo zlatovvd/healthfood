@@ -9,18 +9,20 @@ import { getProductByNameThunk } from 'redux/products/productsThunk';
 import { useProducts } from 'hooks/useProducts';
 import { useDiary } from 'hooks/useDiary';
 import { debounce } from 'lodash';
+import { setIsAutocomplete } from 'redux/diary/diarySlice';
 
 const DiaryAddProductForm = () => {
+
   const [product, setProduct] = useState('');
   const [debounceProduct, setDebounceProduct] = useState('');
   const [grams, setGrams] = useState('');
-  const [isAutocompliteOpen, setIsAutocompliteOpen] = useState(true);
+  //const [isAutocompliteOpen, setIsAutocompliteOpen] = useState(true);
 
   const dispatch = useDispatch();
 
   const isModalOpen = useSelector(selectIsOpen);
 
-  const { diaryDate, isLoading: isDiaryLoading } = useDiary();
+  const { diaryDate, isAutocomplete } = useDiary();
 
   const { isLoading, data, choiceProduct } = useProducts();
 
@@ -45,11 +47,13 @@ const DiaryAddProductForm = () => {
   const handlerClickItem = event => {
     dispatch(setFilter(event.target.textContent));
     setProduct(event.target.textContent);
-    setIsAutocompliteOpen(!isAutocompliteOpen);
+    //setIsAutocompliteOpen(!isAutocompliteOpen);
+    dispatch(setIsAutocomplete(!isAutocomplete));
   };
 
   const handlerClickInput = () => {
-    setIsAutocompliteOpen(true);
+    //setIsAutocompliteOpen(true);
+    dispatch(setIsAutocomplete(true));
   };
 
   const calculateCalories = () => {
@@ -100,7 +104,7 @@ const DiaryAddProductForm = () => {
         />
       </label>
 
-      {data && isAutocompliteOpen && !isLoading ? (
+      {data && isAutocomplete && !isLoading ? (
         <ul className={css.autocomplete}>
           {data.map(item => (
             <li

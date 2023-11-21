@@ -7,6 +7,8 @@ const RightSideBar = () => {
   const { totalCallories, diaryDateFormated } = useDiary();
   const { personInfo } = useIntake();
 
+console.log('person', personInfo.notproducts );
+
   const calculateCalories = useCalculateCalories();
 
   return (

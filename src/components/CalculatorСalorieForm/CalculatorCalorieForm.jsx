@@ -8,6 +8,9 @@ import AppSpinner from 'components/AppSpinner/AppSpiner';
 const CalculatorCalorieForm = () => {
   const { personInfo, isLoading } = useIntake();
 
+  console.log('person 1', personInfo.notproducts );
+
+
   const [values, setValues] = useState(personInfo);
 
   const dispatch = useDispatch();

@@ -6,16 +6,20 @@ import DiaryProductsList from 'components/DiaryProductsList/DiaryProductsList';
 import RightSideBar from 'components/RightSideBar/RightSideBar';
 import { useDiary } from 'hooks/useDiary';
 import { useProducts } from 'hooks/useProducts';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { diaryGetProductThunk } from 'redux/diary/diaryThunk';
 import { selectIsOpen } from 'redux/modal/modalSelector';
 import { open } from 'redux/modal/modalSlice';
+import { selectIsAutocomplete } from 'redux/diary/diarySelector';
+import { setIsAutocomplete } from 'redux/diary/diarySlice';
 
 const DiaryPage = () => {
 
   const isModalOpen = useSelector(selectIsOpen);
   const dispatch = useDispatch();
+
+  //const [isAutocomplite, setIsAutocomplite] = useState(true);
 
   const { diaryDate, isLoading: isDiaryLoading } = useDiary();
 
@@ -25,12 +29,31 @@ const DiaryPage = () => {
     dispatch(open(true));
   };
 
+  const handlePageClick = (event) => {
+    console.log('click', event.target);
+    //setIsAutocomplite (false);
+  }
+
+  const handleEscapeKey = (event) => {
+    console.log('key', event.key);
+    if (event.key==="Escape") {
+      console.log('escape !!!', event.key);
+      dispatch(setIsAutocomplete(false));
+    }
+    
+  }
+
+  useEffect(() => {
+    document.addEventListener("keydown", handleEscapeKey);
+    document.addEventListener("click", handlePageClick);
+  }, [handleEscapeKey]);
+
   useEffect(() => {
     dispatch(diaryGetProductThunk(diaryDate));
   }, [dispatch, diaryDate]);
 
   return (
-    <div className={css.diaryPage}>
+    <div className={css.diaryPage} >
       {(isLoading || isDiaryLoading) && <AppSpinner />}
       <div className={css.diary}>
         <DiaryDateСalendar />

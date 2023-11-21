@@ -24,6 +24,7 @@ const initDiaryState = {
   data: [],
   diaryDate: getToday(),
   isLoading: false,
+  isAutocomplete:false,
 };
 
 const diarySlice = createSlice({
@@ -33,6 +34,16 @@ const diarySlice = createSlice({
     setDiaryDate: {
       reducer(state, {payload}) {
         state.diaryDate = payload;
+      }
+    },
+    setIsAutocomplete: {
+      reducer(state, {payload}) {
+        state.isAutocomplete = payload;
+      }
+    },
+    clearData: {
+      reducer(state) {
+        state.data = null;
       }
     }
   },
@@ -44,7 +55,8 @@ const diarySlice = createSlice({
       })
       .addCase(diaryAddProductThunk.fulfilled, (state, { payload }) => {
         state.status = 'success';
-        state.data = [...state.data, payload];
+        state.data = state.data.filter(item => item._id!==payload._id);
+        state.data = [payload, ...state.data];
         state.isLoading = false;
       })
       .addCase(diaryAddProductThunk.rejected, state => {
@@ -83,4 +95,4 @@ const diarySlice = createSlice({
 
 export const diaryReducer = diarySlice.reducer;
 
-export const { addDiary, removeDiary, setDiaryDate } = diarySlice.actions;
+export const { addDiary, removeDiary, setDiaryDate, setIsAutocomplete } = diarySlice.actions;

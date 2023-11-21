@@ -28,7 +28,6 @@ const authSlice = createSlice({
       })
       .addCase(authRegisterThunk.rejected, (state, {payload}) => {
         state.isLoading = false;
-        console.log('pay register', payload);
       })
       .addCase(authLoginThunk.pending, state => {
         state.isLoading = true;
@@ -40,7 +39,6 @@ const authSlice = createSlice({
         state.isLoading = false;
       })
       .addCase(authLoginThunk.rejected, (state, {payload}) => {
-        console.log('error payload', payload);
         state.error = true;
         state.isLoading = false;
       })
@@ -58,14 +56,12 @@ const authSlice = createSlice({
       })
       .addCase(authRefreshThunk.pending, state => {
         state.isLoading = true;
-        //state.isRefreshing = true;
       })
       .addCase(authRefreshThunk.fulfilled, (state, {payload}) => {
         state.user = payload;
         state.isLoggedIn = true;
         state.isLoading = false;
         state.isRefreshing = true;
-        console.log('pay aust', payload);
       })
       .addCase(authRefreshThunk.rejected, (state, {payload}) => {
         state.isLoading = false;

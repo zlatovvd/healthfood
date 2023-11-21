@@ -19,7 +19,11 @@ const DiaryProductsListItem = ({ diary }) => {
       <button
         className={css.closeBtn}
         onClick={() => handleClickDel(_id)}
-      ></button>
+      >
+        <svg width={20} height={20}>
+          <use href='images/del.svg'></use>
+        </svg>
+      </button>
     </li>
   );
 };

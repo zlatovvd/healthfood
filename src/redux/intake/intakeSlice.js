@@ -1,4 +1,6 @@
 import { intakeAddThunk, intakeGetThunk, intakeUpdateThunk } from "./intakeThunk";
+import { persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 
 const { createSlice } = require("@reduxjs/toolkit");
 
@@ -58,5 +60,11 @@ const intakeSlice = createSlice({
 
 })
 
-export const intakeReducer = intakeSlice.reducer;
+const persistConfig = {
+  key: 'personInfo',
+  storage,
+  whitelist: ['personInfo'],
+}
+
+export const intakeReducer = persistReducer(persistConfig, intakeSlice.reducer);
 export const {addPersonInfo} = intakeSlice.actions;

@@ -6,6 +6,8 @@ export const selectDiaryDate = state => state.diary.diaryDate;
 
 export const selectIsLoading = state => state.diary.isLoading;
 
+export const selectIsAutocomplete = state => state.diary.isAutocomplete;
+
 export const selectTotalCallories = createSelector([selectDiary], diary => {
   let totalDiary = 0;
   diary.map(item => (

@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { selectDiary, selectDiaryDate, selectDiaryDateFormated, selectTotalCallories, selectIsLoading } from "redux/diary/diarySelector";
+import { selectDiary, selectDiaryDate, selectDiaryDateFormated, selectTotalCallories, selectIsLoading, selectIsAutocomplete } from "redux/diary/diarySelector";
 
 export const useDiary = () => {
 
@@ -9,6 +9,7 @@ export const useDiary = () => {
       totalCallories: useSelector(selectTotalCallories),
       diaryDateFormated: useSelector(selectDiaryDateFormated),
       isLoading: useSelector(selectIsLoading),
+      isAutocomplete: useSelector(selectIsAutocomplete),
     };
 
 }

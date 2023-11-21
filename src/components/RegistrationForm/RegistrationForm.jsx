@@ -43,7 +43,7 @@ const RegistrationForm = () => {
       });
     } catch (e) {
       toast({
-        title: `Error ${e}`,
+        title: `Error ${e.message}`,
         position: 'top-right',
         isClosable: true,
         status: 'error',
