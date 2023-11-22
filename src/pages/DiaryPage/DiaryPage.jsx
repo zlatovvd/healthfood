@@ -6,12 +6,11 @@ import DiaryProductsList from 'components/DiaryProductsList/DiaryProductsList';
 import RightSideBar from 'components/RightSideBar/RightSideBar';
 import { useDiary } from 'hooks/useDiary';
 import { useProducts } from 'hooks/useProducts';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { diaryGetProductThunk } from 'redux/diary/diaryThunk';
 import { selectIsOpen } from 'redux/modal/modalSelector';
 import { open } from 'redux/modal/modalSlice';
-import { selectIsAutocomplete } from 'redux/diary/diarySelector';
 import { setIsAutocomplete } from 'redux/diary/diarySlice';
 
 const DiaryPage = () => {
@@ -34,18 +33,23 @@ const DiaryPage = () => {
     //setIsAutocomplite (false);
   }
 
-  const handleEscapeKey = (event) => {
+  const handleEscapeKey = useCallback((event) => {
     console.log('key', event.key);
     if (event.key==="Escape") {
-      console.log('escape !!!', event.key);
       dispatch(setIsAutocomplete(false));
     }
     
-  }
+  }, [dispatch]);
 
   useEffect(() => {
     document.addEventListener("keydown", handleEscapeKey);
     document.addEventListener("click", handlePageClick);
+
+    return () => {
+      document.removeEventListener("keydown", handleEscapeKey);
+      document.removeEventListener("click", handlePageClick);
+    }
+
   }, [handleEscapeKey]);
 
   useEffect(() => {
