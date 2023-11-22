@@ -3,7 +3,6 @@ import css from './LoginForm.module.css';
 import { useDispatch } from 'react-redux';
 import { authLoginThunk } from 'redux/auth/authThunk';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from 'hooks/useAuth';
 import { useToast } from '@chakra-ui/react';
 
 const initialState = {

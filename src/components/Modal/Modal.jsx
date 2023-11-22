@@ -10,13 +10,17 @@ const Modal = ({ close, children }) => {
 
   const dispatch = useDispatch();
 
-  const closeModal = () => {
+  const closeModalWindow = useCallback(()=> {
+    close();
+  }, [close]);
+
+  const closeModal = useCallback(() => {
     setIsOpen(false);
     dispatch(open(false));
     setTimeout(() => {
-      close();
+      closeModalWindow();
     }, 250);
-  };
+  }, [dispatch, closeModalWindow]);
 
   const handleKeyEscape = useCallback((event) => {
     if (event.key === 'Escape') {
@@ -24,12 +28,12 @@ const Modal = ({ close, children }) => {
     }
   }, [closeModal]);
 
-  const handleBackdropClick = event => {
+  const handleBackdropClick = useCallback(event => {
     if (event.target === backdropRef.current) {
       backdropRef.current.removeEventListener('click', handleBackdropClick);
       closeModal();
     }
-  };
+  }, [closeModal]);
 
   useEffect(() => {
     setIsOpen(true);

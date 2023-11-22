@@ -6,7 +6,6 @@ import { lazy, useEffect } from 'react';
 import Layout from './Layout/Layout';
 import { useDispatch } from 'react-redux';
 import { authRefreshThunk } from 'redux/auth/authThunk';
-import { useAuth } from 'hooks/useAuth';
 
 const MainPage = lazy(() => import('pages/MainPage/MainPage'));
 const LoginPage = lazy(() => import('pages/LoginPage/LoginPage'));
